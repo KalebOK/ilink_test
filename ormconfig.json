@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 27017,
+  "username": "postgres",
+  "password": "admin",
+  "database": "ilink",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "autoLoadEntities": true
+}
