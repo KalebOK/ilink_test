@@ -16,12 +16,17 @@ export class User {
   email: string;
 
   @Column()
-  passwordHash: string;
+  name: string;
 
-  @ManyToMany(() => Group)
+  @ManyToMany(() => Group, (groups) => groups.users, {
+    cascade: true,
+  })
   @JoinTable()
-  group: Group[];
+  groups: Group[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, {
+    cascade: true,
+  })
+  @JoinTable()
   friends: User[];
 }

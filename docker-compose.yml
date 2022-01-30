@@ -1,18 +1,26 @@
-version: '3'
+version: '3.3'
+
+volumes:
+  postgres-storage:
+
 services:
 
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: admin
-    ports:
-      - 27017:27017
+  postgres:
+    image: postgres:11
+    container_name: postgres
+    environment: 
+      - POSTGRES_PASSWORD=admin
+      - PGDATA=/data/postgres
     volumes:
-      - ./postgres:/data/db
+      - postgres-storage:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: always
   
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+
+
