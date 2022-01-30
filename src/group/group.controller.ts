@@ -6,14 +6,13 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { GroupDto } from './dto/group.dto';
 import { userGroupDto } from './dto/userGroup.dto';
-import { validate } from 'class-validator';
+import { Group } from './group.entity';
 @Controller('group')
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
@@ -52,7 +51,10 @@ export class GroupController {
 
   @UsePipes(new ValidationPipe())
   @Post(':id/removeUser')
-  async removeUserFromGroup(@Param() id: number, @Body() dto: userGroupDto) {
+  async removeUserFromGroup(
+    @Param() id: number,
+    @Body() dto: userGroupDto,
+  ): Promise<Group> {
     return this.groupService.removeFromGroup(id, dto.userId);
   }
 }
